@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fé - A Fé Move Montanhas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #4a0e0e 0%, #722f37 50%, #8b1538 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #722f37;
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(114, 47, 55, 0.3);
+        }
+
+        .subtitle {
+            color: #8b1538;
+            font-size: 1.4em;
+            font-style: italic;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .bible-icon {
+            font-size: 3.5em;
+            margin: 20px 0;
+            color: #722f37;
+            text-shadow: 2px 2px 6px rgba(114, 47, 55, 0.3);
+        }
+
+        .input-section {
+            margin: 30px 0;
+        }
+
+        .input-text {
+            font-size: 1.2em;
+            color: #5a1f26;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            font-size: 1.1em;
+            border: 3px solid #722f37;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #8b1538;
+            box-shadow: 0 0 20px rgba(114, 47, 55, 0.4);
+        }
+
+        button {
+            background: linear-gradient(135deg, #722f37 0%, #8b1538 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(114, 47, 55, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(114, 47, 55, 0.6);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .word-section {
+            display: none;
+            margin-top: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            border-radius: 20px;
+            border-left: 5px solid #8b1538;
+            animation: fadeIn 0.5s;
+            box-shadow: 0 10px 30px rgba(114, 47, 55, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .greeting {
+            font-size: 1.3em;
+            color: #722f37;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .verse {
+            font-size: 1.4em;
+            line-height: 1.6;
+            color: #5a1f26;
+            margin: 20px 0;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .reference {
+            font-size: 1.1em;
+            color: #8b1538;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .message {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #722f37;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .new-word-btn {
+            margin-top: 20px;
+            background: linear-gradient(135deg, #8b1538 0%, #722f37 100%);
+        }
+
+        .payment-section {
+            display: none;
+            margin-top: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            border-radius: 20px;
+            border: 3px solid #8b1538;
+            animation: fadeIn 0.5s;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(114, 47, 55, 0.3);
+        }
+
+        .payment-title {
+            font-size: 1.8em;
+            color: #722f37;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .payment-text {
+            font-size: 1.1em;
+            color: #5a1f26;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .pix-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 5px 20px rgba(114, 47, 55, 0.2);
+            border: 2px solid #f8bbd0;
+        }
+
+        .pix-label {
+            font-size: 1.2em;
+            color: #8b1538;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .pix-key {
+            font-size: 1.5em;
+            color: #722f37;
+            font-weight: bold;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            letter-spacing: 2px;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1em;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.6);
+        }
+
+        .unlock-btn {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        .unlock-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.6);
+        }
+
+        .warning-text {
+            font-size: 0.9em;
+            color: #8b1538;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        .counter-section {
+            margin-top: 20px;
+            padding: 12px;
+            background: rgba(114, 47, 55, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(114, 47, 55, 0.2);
+        }
+
+        .counter-title {
+            font-size: 0.75em;
+            color: #722f37;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .counter-stats {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(114, 47, 55, 0.2);
+            min-width: 80px;
+            border: 1px solid rgba(139, 21, 56, 0.2);
+        }
+
+        .stat-label {
+            font-size: 0.65em;
+            color: #8b1538;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+
+        .stat-number {
+            font-size: 1.2em;
+            color: #722f37;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: #722f37;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>FÉ</h1>
+            <div class="subtitle">A Fé Move Montanhas</div>
+            <div class="bible-icon">✝️</div>
+        </div>
+
+        <div class="input-section" id="inputSection">
+            <p class="input-text">
+                Digite seu nome e receba sua palavra de fé para hoje
+            </p>
+            <input type="text" id="nameInput" placeholder="Seu nome aqui..." />
+            <br>
+            <button onclick="generateWord()">Receber Palavra de Fé</button>
+        </div>
+
+        <div class="word-section" id="wordSection">
+            <div class="greeting" id="greeting"></div>
+            <div class="verse" id="verse"></div>
+            <div class="reference" id="reference"></div>
+            <div class="message" id="message"></div>
+            <button class="new-word-btn" onclick="requestNewWord()">Nova Palavra</button>
+        </div>
+
+        <div class="payment-section" id="paymentSection">
+            <div class="payment-title">🔒 Limite de Palavras Gratuitas Atingido</div>
+            <div class="payment-text">
+                Você recebeu suas <strong>7 palavras de fé gratuitas</strong>! 🙏<br><br>
+                Para continuar recebendo palavras ilimitadas de motivação e prosperidade,<br>
+                faça uma contribuição única de <strong style="font-size: 1.3em;">R$ 5,00</strong>
+            </div>
+            
+            <div class="pix-box">
+                <div class="pix-label">💳 Pague via PIX</div>
+                <div class="pix-key" id="pixKey">14712258799</div>
+                <button class="copy-btn" onclick="copyPixKey()">📋 Copiar Chave PIX</button>
+            </div>
+
+            <div class="payment-text">
+                Após realizar o pagamento, clique no botão abaixo e insira o código de liberação que você receberá:
+            </div>
+            
+            <button class="unlock-btn" onclick="unlockAccess()">🔓 Já Paguei - Liberar Acesso</button>
+            
+            <div class="warning-text">
+                * Pagamento único por dispositivo<br>
+                * Acesso ilimitado após confirmação
+            </div>
+        </div>
+
+        <div class="counter-section">
+            <div class="counter-title">📊 Estatísticas</div>
+            <div class="counter-stats">
+                <div class="stat-box">
+                    <div class="stat-label">Hoje</div>
+                    <div class="stat-number" id="dailyCount">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Mês</div>
+                    <div class="stat-number" id="monthlyCount">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Recorde</div>
+                    <div class="stat-number" id="recordCount">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Deus é um Deus do Impossível! 🙏
+        </div>
+    </div>
+
+    <script>
+        const biblicalWords = [
+            {
+                verse: "Tudo posso naquele que me fortalece.",
+                reference: "Filipenses 4:13",
+                message: "Hoje, {nome}, saiba que não há desafio grande demais quando você está com Deus. Ele é sua força, seu escudo e sua vitória. As montanhas à sua frente se moverão pelo poder da sua fé!"
+            },
+            {
+                verse: "Porque para Deus nada é impossível.",
+                reference: "Lucas 1:37",
+                message: "{nome}, o impossível é apenas uma oportunidade para Deus mostrar Seu poder! Não há situação que Ele não possa transformar. Creia e verá a glória de Deus manifestada em sua vida!"
+            },
+            {
+                verse: "Se você tiver fé do tamanho de um grão de mostarda, poderá dizer a este monte: Vá daqui para lá, e ele irá.",
+                reference: "Mateus 17:20",
+                message: "Sua fé, {nome}, tem o poder de mover montanhas! Não importa o tamanho do obstáculo, com Deus ao seu lado, você é mais que vencedor. Declare sua vitória hoje!"
+            },
+            {
+                verse: "O Senhor é o meu pastor; nada me faltará.",
+                reference: "Salmos 23:1",
+                message: "{nome}, Deus é seu provedor! Ele conhece cada uma de suas necessidades e já preparou abundância para você. Confie, prospere e receba Suas bênçãos!"
+            },
+            {
+                verse: "Entrega o teu caminho ao Senhor; confia nele, e ele tudo fará.",
+                reference: "Salmos 37:5",
+                message: "Hoje, {nome}, entregue seus planos a Deus. Ele vai direcionar seus passos rumo ao sucesso e à prosperidade. Confie plenamente, pois Ele é fiel!"
+            },
+            {
+                verse: "Porque Eu sei os planos que tenho para vocês, planos de fazê-los prosperar e não de causar dano, planos de dar a vocês esperança e um futuro.",
+                reference: "Jeremias 29:11",
+                message: "{nome}, os planos de Deus para sua vida são de prosperidade, paz e vitória! Não desista, pois o melhor está por vir. Seu futuro é glorioso!"
+            },
+            {
+                verse: "Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus; eu te fortaleço, e te ajudo, e te sustento.",
+                reference: "Isaías 41:10",
+                message: "{nome}, Deus está com você em cada passo! Não tenha medo, pois Ele é seu sustento e fortaleza. Siga em frente com coragem e fé!"
+            },
+            {
+                verse: "Busquem em primeiro lugar o Reino de Deus e a sua justiça, e todas essas coisas serão acrescentadas a vocês.",
+                reference: "Mateus 6:33",
+                message: "Quando você busca a Deus em primeiro lugar, {nome}, Ele multiplica suas bênçãos! A prosperidade, o favor e a abundância fluem naturalmente. Priorize o Reino!"
+            },
+            {
+                verse: "E tudo o que pedirem em oração, se crerem, vocês receberão.",
+                reference: "Mateus 21:22",
+                message: "{nome}, sua oração tem poder! Deus ouve e responde. Creia de todo coração e prepare-se para receber os milagres que Ele tem reservados para você!"
+            },
+            {
+                verse: "O ladrão vem apenas para roubar, matar e destruir; eu vim para que tenham vida e a tenham plenamente.",
+                reference: "João 10:10",
+                message: "Deus quer que você viva em abundância, {nome}! Vida plena, saúde, prosperidade e alegria são Suas promessas para você. Receba hoje!"
+            },
+            {
+                verse: "O justo florescerá como a palmeira, crescerá como o cedro no Líbano.",
+                reference: "Salmos 92:12",
+                message: "{nome}, você foi plantado por Deus para prosperar! Como a palmeira, você crescerá forte e dará frutos abundantes. Sua prosperidade é certa!"
+            },
+            {
+                verse: "Alegrem-se sempre no Senhor. Novamente direi: alegrem-se!",
+                reference: "Filipenses 4:4",
+                message: "Hoje, {nome}, escolha a alegria! Deus está trabalhando em seu favor. A alegria do Senhor é sua força e sua vitória!"
+            },
+            {
+                verse: "Porque onde estiverem dois ou três reunidos em meu nome, ali eu estou no meio deles.",
+                reference: "Mateus 18:20",
+                message: "{nome}, você nunca está sozinho! Deus está presente em cada momento. Sua presença traz paz, poder e prosperidade!"
+            },
+            {
+                verse: "Confie no Senhor de todo o seu coração e não se apoie em seu próprio entendimento.",
+                reference: "Provérbios 3:5",
+                message: "{nome}, confie plenamente em Deus! Ele vê o que você não vê e prepara caminhos que você nem imagina. Sua confiança será recompensada!"
+            },
+            {
+                verse: "O Senhor é a minha luz e a minha salvação; de quem terei temor?",
+                reference: "Salmos 27:1",
+                message: "{nome}, com Deus como sua luz, nenhuma escuridão pode prevalecer! Caminhe com coragem, pois Ele ilumina seus passos!"
+            },
+            {
+                verse: "Lançando sobre ele toda a vossa ansiedade, porque ele tem cuidado de vós.",
+                reference: "1 Pedro 5:7",
+                message: "{nome}, entregue suas preocupações a Deus! Ele cuida de você com amor perfeito. Descanse e veja Seus milagres!"
+            },
+            {
+                verse: "Mas os que esperam no Senhor renovarão as suas forças, subirão com asas como águias.",
+                reference: "Isaías 40:31",
+                message: "{nome}, sua força está sendo renovada agora! Como águia, você voará alto e alcançará novos horizontes. Deus está te elevando!"
+            },
+            {
+                verse: "E conhecereis a verdade, e a verdade vos libertará.",
+                reference: "João 8:32",
+                message: "{nome}, a verdade de Deus te liberta! Liberdade financeira, emocional e espiritual são suas. Receba hoje!"
+            },
+            {
+                verse: "Com Deus faremos proezas, pois ele esmagará os nossos inimigos.",
+                reference: "Salmos 60:12",
+                message: "{nome}, você fará grandes proezas hoje! Deus está lutando por você e garantindo sua vitória. Avance com fé!"
+            },
+            {
+                verse: "Tudo tem o seu tempo determinado, e há tempo para todo propósito debaixo do céu.",
+                reference: "Eclesiastes 3:1",
+                message: "{nome}, este é o seu tempo! O tempo da sua colheita, da sua vitória e da sua prosperidade chegou. Creia!"
+            },
+            {
+                verse: "Peçam, e será dado; busquem, e encontrarão; batam, e a porta será aberta.",
+                reference: "Mateus 7:7",
+                message: "{nome}, Deus está esperando para abençoar você! Peça com fé, busque com determinação, e as portas se abrirão!"
+            },
+            {
+                verse: "Grande é o Senhor e mui digno de ser louvado; sua grandeza é insondável.",
+                reference: "Salmos 145:3",
+                message: "{nome}, você serve a um Deus grande! Não há problema grande demais para Ele. Confie em Sua grandeza!"
+            },
+            {
+                verse: "Ora, àquele que é poderoso para fazer infinitamente mais do que tudo quanto pedimos ou pensamos.",
+                reference: "Efésios 3:20",
+                message: "{nome}, prepare-se! Deus vai fazer além do que você pediu, além do que sonhou. Seus milagres são abundantes!"
+            },
+            {
+                verse: "O Senhor te abençoará e te guardará.",
+                reference: "Números 6:24",
+                message: "{nome}, a bênção do Senhor está sobre você hoje! Ele te guarda, te protege e te prospera em tudo!"
+            },
+            {
+                verse: "Bem-aventurado o homem que confia no Senhor e cuja esperança é o Senhor.",
+                reference: "Jeremias 17:7",
+                message: "{nome}, sua confiança em Deus te torna bem-aventurado! Prosperidade, saúde e paz são suas recompensas!"
+            },
+            {
+                verse: "Pois, se Deus é por nós, quem será contra nós?",
+                reference: "Romanos 8:31",
+                message: "{nome}, com Deus ao seu lado, você é imbatível! Ninguém pode impedir o que Ele planejou para você. Vitória certa!"
+            },
+            {
+                verse: "Aquele que habita no abrigo do Altíssimo descansará à sombra do Todo-poderoso.",
+                reference: "Salmos 91:1",
+                message: "{nome}, no abrigo de Deus você está seguro! Descanse em Seu cuidado e veja milagres acontecerem!"
+            },
+            {
+                verse: "Eu sou o caminho, a verdade e a vida. Ninguém vem ao Pai senão por mim.",
+                reference: "João 14:6",
+                message: "{nome}, Jesus é o caminho para todas as suas vitórias! Nele você encontra direção, verdade e vida abundante!"
+            },
+            {
+                verse: "O Senhor é o meu auxílio, não temerei. Que me poderá fazer o homem?",
+                reference: "Hebreus 13:6",
+                message: "{nome}, com Deus como seu auxílio, você não precisa temer nada! Ele é maior que qualquer adversário!"
+            },
+            {
+                verse: "Mas buscai primeiro o seu reino e a sua justiça, e todas estas coisas vos serão acrescentadas.",
+                reference: "Mateus 6:33",
+                message: "{nome}, quando você prioriza Deus, Ele cuida de tudo! Prosperidade e provisão são garantidas para quem O busca!"
+            }
+        ];
+
+        let usedIndexes = [];
+        const FREE_LIMIT = 7;
+        const UNLOCK_CODE = "FE2025";
+
+        function getUsageCount() {
+            const count = localStorage.getItem('wordCount');
+            return count ? parseInt(count) : 0;
+        }
+
+        function incrementUsage() {
+            const count = getUsageCount() + 1;
+            localStorage.setItem('wordCount', count);
+            return count;
+        }
+
+        function isPremium() {
+            return localStorage.getItem('premium') === 'true';
+        }
+
+        function unlockPremium() {
+            localStorage.setItem('premium', 'true');
+        }
+
+        function updateCounters() {
+            const today = new Date().toDateString();
+            const currentMonth = new Date().getMonth() + '-' + new Date().getFullYear();
+            
+            let dailyCount = 0;
+            let monthlyCount = 0;
+            let recordCount = 0;
+
+            document.getElementById('dailyCount').textContent = dailyCount;
+            document.getElementById('monthlyCount').textContent = monthlyCount;
+            document.getElementById('recordCount').textContent = recordCount;
+        }
+
+        function incrementCounters() {
+            let dailyCount = parseInt(document.getElementById('dailyCount').textContent);
+            let monthlyCount = parseInt(document.getElementById('monthlyCount').textContent);
+            let recordCount = parseInt(document.getElementById('recordCount').textContent);
+
+            dailyCount++;
+            monthlyCount++;
+
+            if (monthlyCount > recordCount) {
+                recordCount = monthlyCount;
+            }
+
+            document.getElementById('dailyCount').textContent = dailyCount;
+            document.getElementById('monthlyCount').textContent = monthlyCount;
+            document.getElementById('recordCount').textContent = recordCount;
+        }
+
+        function generateWord() {
+            const name = document.getElementById('nameInput').value.trim();
+            
+            if (name === '') {
+                alert('Por favor, digite seu nome para receber sua palavra de fé!');
+                return;
+            }
+
+            const usageCount = getUsageCount();
+            if (usageCount >= FREE_LIMIT && !isPremium()) {
+                showPaymentScreen();
+                return;
+            }
+
+            if (usedIndexes.length === biblicalWords.length) {
+                usedIndexes = [];
+            }
+
+            let wordIndex;
+            do {
+                wordIndex = Math.floor(Math.random() * biblicalWords.length);
+            } while (usedIndexes.includes(wordIndex));
+
+            usedIndexes.push(wordIndex);
+            const todayWord = biblicalWords[wordIndex];
+
+            document.getElementById('greeting').textContent = '🌟 ' + name + ', esta é sua palavra de fé para hoje! 🌟';
+            document.getElementById('verse').textContent = '"' + todayWord.verse + '"';
+            document.getElementById('reference').textContent = todayWord.reference;
+            document.getElementById('message').textContent = todayWord.message.replace('{nome}', name);
+
+            document.getElementById('inputSection').style.display = 'none';
+            document.getElementById('wordSection').style.display = 'block';
+
+            incrementUsage();
+            incrementCounters();
+
+            const remaining = FREE_LIMIT - getUsageCount();
+            if (remaining > 0 && remaining <= 3 && !isPremium()) {
+                alert('⚠️ Você tem ' + remaining + ' palavra' + (remaining > 1 ? 's' : '') + ' gratuita' + (remaining > 1 ? 's' : '') + ' restante' + (remaining > 1 ? 's' : '') + '!');
+            }
+        }
+
+        function requestNewWord() {
+            const usageCount = getUsageCount();
+            if (usageCount >= FREE_LIMIT && !isPremium()) {
+                showPaymentScreen();
+                return;
+            }
+            resetForm();
+        }
+
+        function showPaymentScreen() {
+            document.getElementById('inputSection').style.display = 'none';
+            document.getElementById('wordSection').style.display = 'none';
+            document.getElementById('paymentSection').style.display = 'block';
+        }
+
+        function copyPixKey() {
+            const pixKey = document.getElementById('pixKey').textContent;
+            navigator.clipboard.writeText(pixKey).then(function() {
+                alert('✅ Chave PIX copiada! Cole no seu app de pagamentos.');
+            }).catch(function() {
+                alert('❌ Erro ao copiar. Copie manualmente: ' + pixKey);
+            });
+        }
+
+        function unlockAccess() {
+            const code = prompt('Digite o código de liberação que você recebeu após o pagamento:');
+            
+            if (code === UNLOCK_CODE) {
+                unlockPremium();
+                alert('🎉 Acesso liberado com sucesso! Aproveite suas palavras de fé ilimitadas! 🙏');
+                document.getElementById('paymentSection').style.display = 'none';
+                document.getElementById('inputSection').style.display = 'block';
+            } else if (code) {
+                alert('❌ Código inválido. Verifique o código recebido ou entre em contato.');
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('nameInput').value = '';
+            document.getElementById('inputSection').style.display = 'block';
+            document.getElementById('wordSection').style.display = 'none';
+            document.getElementById('paymentSection').style.display = 'none';
+        }
+
+        document.getElementById('nameInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                generateWord();
+            }
+        });
+
+        window.onload = function() {
+            updateCounters();
+        };
+    </script>
+</body>
+</html>
